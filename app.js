@@ -220,7 +220,7 @@ function parseSignalJson(raw, expectedType) {
   return parsed;
 }
 
-function waitForIceGatheringComplete(pc, timeoutMs = 12000) {
+function waitForIceGatheringComplete(pc, timeoutMs = 45000) {
   if (pc.iceGatheringState === 'complete') {
     return Promise.resolve();
   }
@@ -267,7 +267,13 @@ async function handleGenerateOffer() {
   await pc.setLocalDescription(offer);
   addLog('Offer creada y establecida como localDescription. Esperando ICE...');
 
-  await waitForIceGatheringComplete(pc);
+  try {
+    await waitForIceGatheringComplete(pc);
+  } catch (error) {
+    addLog(`ICE gathering tardó más de lo esperado: ${error.message}`);
+    addLog('Se exportará la offer actual aunque la recopilación ICE siga en curso.');
+  }
+
   exportLocalDescriptionToTextArea(offerLocalEl, pc.localDescription);
   addLog('Offer local exportada como JSON. Cópiala al peer B.');
 }
@@ -307,7 +313,13 @@ async function handleGenerateAnswer() {
   await pc.setLocalDescription(answer);
   addLog('Answer creada y establecida como localDescription. Esperando ICE...');
 
-  await waitForIceGatheringComplete(pc);
+  try {
+    await waitForIceGatheringComplete(pc);
+  } catch (error) {
+    addLog(`ICE gathering tardó más de lo esperado: ${error.message}`);
+    addLog('Se exportará la answer actual aunque la recopilación ICE siga en curso.');
+  }
+
   exportLocalDescriptionToTextArea(answerLocalEl, pc.localDescription);
   addLog('Answer local exportada como JSON. Cópiala al peer A.');
 }
