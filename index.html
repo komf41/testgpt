@@ -3,25 +3,106 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hola mundo</title>
-    <style>
-      body {
-        margin: 0;
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-        background: #0f172a;
-        color: #e2e8f0;
-      }
-
-      h1 {
-        font-size: clamp(2rem, 6vw, 4rem);
-        margin: 0;
-      }
-    </style>
+    <title>P2P Chat WebRTC (Milestone 1)</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>¡Hola mundo!</h1>
+    <main class="app">
+      <header class="app__header">
+        <h1>Chat P2P 1-a-1 (WebRTC)</h1>
+        <p class="subtitle">
+          Milestone 1: interfaz estática lista para evolucionar a señalización manual y chat
+          entre navegadores.
+        </p>
+        <div class="status status--idle" id="connectionStatus" aria-live="polite">
+          Estado: idle
+        </div>
+      </header>
+
+      <section class="card">
+        <h2>Rol</h2>
+        <div class="role-actions">
+          <button id="btnRoleA" type="button">Soy A (creador de offer)</button>
+          <button id="btnRoleB" type="button">Soy B (respondedor)</button>
+          <button id="btnResetRole" type="button" class="btn-secondary">Limpiar rol</button>
+        </div>
+        <p class="hint">
+          Nota: por ahora los botones solo actualizan estado visual (sin WebRTC aún).
+        </p>
+      </section>
+
+      <section class="grid grid--two">
+        <article class="card">
+          <h2>Offer (SDP)</h2>
+          <label for="offerLocal">Offer local generada (A)</label>
+          <textarea
+            id="offerLocal"
+            placeholder="Aquí aparecerá la offer local en próximos milestones"
+            rows="7"
+            readonly
+          ></textarea>
+
+          <label for="offerRemote">Offer remota pegada (B)</label>
+          <textarea
+            id="offerRemote"
+            placeholder="Pega aquí la offer remota"
+            rows="7"
+          ></textarea>
+
+          <div class="stack-actions">
+            <button id="btnGenerateOffer" type="button">Generar offer</button>
+            <button id="btnApplyOffer" type="button">Aplicar offer</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Answer (SDP)</h2>
+          <label for="answerLocal">Answer local generada (B)</label>
+          <textarea
+            id="answerLocal"
+            placeholder="Aquí aparecerá la answer local en próximos milestones"
+            rows="7"
+            readonly
+          ></textarea>
+
+          <label for="answerRemote">Answer remota pegada (A)</label>
+          <textarea
+            id="answerRemote"
+            placeholder="Pega aquí la answer remota"
+            rows="7"
+          ></textarea>
+
+          <div class="stack-actions">
+            <button id="btnGenerateAnswer" type="button">Generar answer</button>
+            <button id="btnApplyAnswer" type="button">Aplicar answer</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>Chat (placeholder)</h2>
+        <div id="chatMessages" class="chat-box" aria-live="polite"></div>
+        <form id="chatForm" class="chat-form">
+          <input
+            id="chatInput"
+            type="text"
+            placeholder="Escribe un mensaje (habilitado en Milestone 2)"
+            disabled
+          />
+          <button id="btnSend" type="submit" disabled>Enviar</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Logs (placeholder)</h2>
+        <pre id="logOutput" class="logs" aria-live="polite"></pre>
+      </section>
+
+      <section class="actions">
+        <button id="btnResetAll" type="button" class="btn-danger">Reiniciar todo</button>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
   </body>
 </html>
