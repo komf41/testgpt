@@ -76,7 +76,12 @@ function clearChatMessages() {
 function addChatMessage(author, message) {
   const row = document.createElement('div');
   row.className = 'chat-message';
-  row.innerHTML = `<strong>${author}:</strong> ${message}`;
+
+  const authorEl = document.createElement('strong');
+  authorEl.textContent = `${author}:`;
+  row.appendChild(authorEl);
+  row.appendChild(document.createTextNode(` ${message}`));
+
   chatMessagesEl.appendChild(row);
   chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
 }
