@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>P2P Chat WebRTC (Milestone 1)</title>
+    <title>P2P Chat WebRTC (Milestone 2)</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -11,8 +11,7 @@
       <header class="app__header">
         <h1>Chat P2P 1-a-1 (WebRTC)</h1>
         <p class="subtitle">
-          Milestone 1: interfaz estática lista para evolucionar a señalización manual y chat
-          entre navegadores.
+          Milestone 2: señalización manual por JSON y chat de texto 1-a-1 con RTCDataChannel.
         </p>
         <div class="status status--idle" id="connectionStatus" aria-live="polite">
           Estado: idle
@@ -27,7 +26,7 @@
           <button id="btnResetRole" type="button" class="btn-secondary">Limpiar rol</button>
         </div>
         <p class="hint">
-          Nota: por ahora los botones solo actualizan estado visual (sin WebRTC aún).
+          Selecciona un rol para habilitar el flujo manual de señalización entre dos navegadores.
         </p>
       </section>
 
@@ -80,13 +79,13 @@
       </section>
 
       <section class="card">
-        <h2>Chat (placeholder)</h2>
+        <h2>Chat 1-a-1 (DataChannel)</h2>
         <div id="chatMessages" class="chat-box" aria-live="polite"></div>
         <form id="chatForm" class="chat-form">
           <input
             id="chatInput"
             type="text"
-            placeholder="Escribe un mensaje (habilitado en Milestone 2)"
+            placeholder="Escribe un mensaje"
             disabled
           />
           <button id="btnSend" type="submit" disabled>Enviar</button>
@@ -94,7 +93,7 @@
       </section>
 
       <section class="card">
-        <h2>Logs (placeholder)</h2>
+        <h2>Logs</h2>
         <pre id="logOutput" class="logs" aria-live="polite"></pre>
       </section>
 

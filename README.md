@@ -1,40 +1,35 @@
-# P2P Chat 1-a-1 (WebRTC DataChannel) — Milestone 1
+# P2P Chat 1-a-1 (WebRTC DataChannel) — Milestone 2
 
-Este proyecto prepara una app web estática para publicarse en **GitHub Pages**.
+Este proyecto implementa una app web para chat P2P 1-a-1 usando **WebRTC** con señalización manual por copy/paste en JSON.
 
 ## Estado actual
 
-Se implementó únicamente el **Milestone 1**:
+Se implementó el **Milestone 2**:
 
-- ✅ UI estática
-- ✅ Estructura base para offer/answer por copy/paste
-- ✅ Placeholders de chat y logs
-- ✅ Sin WebRTC real todavía
+- ✅ `RTCPeerConnection` real
+- ✅ `RTCDataChannel` para mensajes de texto
+- ✅ Flujo manual completo de offer/answer
+- ✅ Exportación e importación de señalización en JSON (textareas)
+- ✅ Espera a ICE gathering completo antes de exportar SDP local
+
+## Flujo manual de conexión
+
+1. En navegador A, elige **Soy A** y pulsa **Generar offer**.
+2. Copia el JSON de **Offer local generada (A)** y pégalo en **Offer remota pegada (B)** en navegador B.
+3. En navegador B, elige **Soy B**, pulsa **Aplicar offer** y luego **Generar answer**.
+4. Copia el JSON de **Answer local generada (B)** y pégalo en **Answer remota pegada (A)** en navegador A.
+5. En navegador A, pulsa **Aplicar answer**.
+6. Cuando el DataChannel quede en estado abierto, ambos lados pueden enviar y recibir mensajes.
 
 ## Estructura
 
-- `index.html`: layout principal y secciones de la app
-- `style.css`: estilos responsivos
-- `app.js`: lógica mínima de UI (estado visual, botones placeholder y reinicio de interfaz)
-
-## Qué hace hoy
-
-- Permite seleccionar rol visualmente (A o B).
-- Muestra áreas de texto para `offer` y `answer` (sin conexión real).
-- Incluye un bloque de chat deshabilitado (placeholder para Milestone 2).
-- Incluye un área de logs local de eventos de interfaz.
-- Permite limpiar rol y reiniciar la UI.
-
-## Qué **no** hace todavía
-
-- No crea `RTCPeerConnection`.
-- No genera ni aplica offer/answer reales.
-- No abre `RTCDataChannel`.
-- No intercambia mensajes entre dispositivos.
+- `index.html`: layout principal y secciones de rol, señalización, chat y logs.
+- `style.css`: estilos responsivos y componentes visuales.
+- `app.js`: lógica WebRTC, DataChannel, señalización manual por JSON, chat y logs.
 
 ## Cómo ejecutar localmente
 
-Al ser sitio estático, puedes abrir `index.html` directamente en el navegador o usar un servidor estático simple.
+Puedes abrir `index.html` directamente o usar un servidor estático.
 
 Ejemplo con Python:
 
@@ -48,13 +43,8 @@ Luego abre:
 http://localhost:8080
 ```
 
-## Publicar en GitHub Pages (preview estático)
+## Limitaciones actuales
 
-1. Sube este repositorio a GitHub.
-2. Ve a **Settings → Pages**.
-3. En **Build and deployment** selecciona:
-   - **Source:** `Deploy from a branch`
-   - **Branch:** `main` (o la rama por defecto) y carpeta `/ (root)`
-4. Guarda y espera la URL pública.
-
-> Nota: En milestones siguientes se añadirá la conexión WebRTC manual completa para cumplir el MVP.
+- No hay QR para señalización.
+- No hay audio/video.
+- No hay soporte multiusuario (solo 1-a-1).

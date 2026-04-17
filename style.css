@@ -71,6 +71,11 @@ h2 {
   color: #c2f4db;
 }
 
+.status--connected {
+  background: #1e6642;
+  color: #d8ffe9;
+}
+
 .grid {
   display: grid;
   gap: 1rem;
@@ -159,9 +164,15 @@ button:disabled {
   border: 1px solid var(--border);
   border-radius: 10px;
   min-height: 140px;
+  max-height: 300px;
+  overflow: auto;
   background: #0d1530;
   padding: 0.75rem;
   color: var(--muted);
+}
+
+.chat-message + .chat-message {
+  margin-top: 0.5rem;
 }
 
 .chat-form {
